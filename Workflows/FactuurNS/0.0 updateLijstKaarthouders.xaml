@@ -125,7 +125,7 @@
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </ui:ReadRange>
-      <ui:WriteRange StartingCell="{x:Null}" AddHeaders="True" DataTable="[out_dt_updateLijstKaarthouders]" DisplayName="Write Range updateLijstKaarthouders" sap:VirtualizedContainerService.HintSize="338,116" sap2010:WorkflowViewState.IdRef="WriteRange_1" SheetName="Overzicht Kaarthouders" WorkbookPath="[in_Config(&quot;NS_filepath_dataNS&quot;).ToString]" />
+      <ui:WriteRange StartingCell="{x:Null}" AddHeaders="True" DataTable="[out_dt_updateLijstKaarthouders]" DisplayName="Write Range updateLijstKaarthouders" sap:VirtualizedContainerService.HintSize="338,116" sap2010:WorkflowViewState.IdRef="WriteRange_1" SheetName="Overzicht Kaarthouders" WorkbookPath="[in_filepath_updatedLijstKaartHouders]" />
       <ui:LogMessage DisplayName="Log Message: updateLijstKaarthouders successful" sap:VirtualizedContainerService.HintSize="338,92" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="[&quot;updateLijstKaarthouders successful...&quot;]" />
     </Sequence>
   </Sequence>

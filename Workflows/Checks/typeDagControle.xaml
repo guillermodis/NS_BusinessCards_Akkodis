@@ -5,7 +5,6 @@
     <x:Property Name="in_naamTrainee" Type="InArgument(x:String)" />
     <x:Property Name="in_dt_totaleSpec" Type="InArgument(sd:DataTable)" />
     <x:Property Name="io_dt_bijzondereDagen" Type="InOutArgument(sd:DataTable)" />
-    <x:Property Name="in_Config" Type="InArgument(scg:Dictionary(x:String, x:Object))" />
   </x:Members>
   <this:typeDagControle.in_dt_totaleSpec>
     <InArgument x:TypeArguments="sd:DataTable" />
@@ -13,7 +12,7 @@
   <VisualBasic.Settings>
     <x:Null />
   </VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1203,1479</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1203,1043</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>typeDagControle_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="31">
@@ -98,13 +97,13 @@
       <AssemblyReference>UiPath.System.Activities.Design</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="typeDagControle" sap:VirtualizedContainerService.HintSize="658,1414" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="typeDagControle" sap:VirtualizedContainerService.HintSize="658,978" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <Sequence DisplayName="Seq: typeDagControle" sap:VirtualizedContainerService.HintSize="616,1326" sap2010:WorkflowViewState.IdRef="Sequence_2">
+    <Sequence DisplayName="Seq: typeDagControle" sap:VirtualizedContainerService.HintSize="616,890" sap2010:WorkflowViewState.IdRef="Sequence_2">
       <Sequence.Variables>
         <Variable x:TypeArguments="sd:DataRow" Name="newRow" />
         <Variable x:TypeArguments="sd:DataTable" Name="dt_filteredTotaleSpec" />
@@ -114,14 +113,14 @@
           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
-      <Sequence DisplayName="Init" sap:VirtualizedContainerService.HintSize="554,516" sap2010:WorkflowViewState.IdRef="Sequence_3">
+      <Sequence DisplayName="Init" sap:VirtualizedContainerService.HintSize="554,80" sap2010:WorkflowViewState.IdRef="Sequence_3">
         <Sequence.Variables>
           <Variable x:TypeArguments="x:String" Name="Jaar" />
           <Variable x:TypeArguments="x:String" Name="GoedeVrijdag2023" />
         </Sequence.Variables>
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
             <x:Boolean x:Key="IsPinned">False</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>

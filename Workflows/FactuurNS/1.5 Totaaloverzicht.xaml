@@ -5,6 +5,7 @@
     <x:Property Name="in_dt_Fiets" Type="InArgument(sd:DataTable)" />
     <x:Property Name="in_dt_BusTramMetro" Type="InArgument(sd:DataTable)" />
     <x:Property Name="out_dt_totaalOverzicht" Type="OutArgument(sd:DataTable)" />
+    <x:Property Name="in_filepath_dataNS" Type="InArgument(x:String)" />
   </x:Members>
   <VisualBasic.Settings>
     <x:Null />
