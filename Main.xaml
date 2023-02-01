@@ -92,19 +92,22 @@
       <Variable x:TypeArguments="x:String" Name="maand" />
       <Variable x:TypeArguments="sd:DataTable" Name="dt_Assets" />
       <Variable x:TypeArguments="scg:Dictionary(x:String, x:Object)" Name="Config" />
+      <Variable x:TypeArguments="x:String" Name="filepath_PDFfactuurNS" />
+      <Variable x:TypeArguments="sd:DataTable" Name="dt_totaleSpecificaties" />
     </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <Sequence DisplayName="Init Config" sap:VirtualizedContainerService.HintSize="400,80" sap2010:WorkflowViewState.IdRef="Sequence_4">
+    <Sequence DisplayName="Init" sap:VirtualizedContainerService.HintSize="400,80" sap2010:WorkflowViewState.IdRef="Sequence_4">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsExpanded">False</x:Boolean>
           <x:Boolean x:Key="IsPinned">False</x:Boolean>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
+      <ui:SelectFile DisplayName="Browse For NS Factuur (.PDF-bestand)" Filter="PDF|*.pdf" sap:VirtualizedContainerService.HintSize="510,138" sap2010:WorkflowViewState.IdRef="SelectFile_1" SelectedFile="[filepath_PDFfactuurNS]" />
       <Assign DisplayName="Assign: Config" sap:VirtualizedContainerService.HintSize="510,82" sap2010:WorkflowViewState.IdRef="Assign_1">
         <Assign.To>
           <OutArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)">[Config]</OutArgument>
@@ -161,6 +164,9 @@
         <InArgument x:TypeArguments="x:String" x:Key="in_filepath_updatedLijstKaartHouders">
           <VisualBasicValue x:TypeArguments="x:String" ExpressionText="Config(&quot;NS_filepath_updatedLijstKaartHouders&quot;).ToString" />
         </InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_NS_Excel_PW">
+          <VisualBasicValue x:TypeArguments="x:String" ExpressionText="Config(&quot;NS_Excel_PW&quot;).ToString" />
+        </InArgument>
       </ui:InvokeWorkflowFile.Arguments>
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -171,18 +177,13 @@
     </ui:InvokeWorkflowFile>
     <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="1.0 updateOverview.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="400,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" UnSafe="False" WorkflowFileName="Workflows\FactuurNS\1.1 updateOverview.xaml">
       <ui:InvokeWorkflowFile.Arguments>
-        <OutArgument x:TypeArguments="sd:DataTable" x:Key="out_dt_totaalOverzicht">
-          <VisualBasicReference x:TypeArguments="sd:DataTable" ExpressionText="dt_totaalOverzicht" />
-        </OutArgument>
-        <InOutArgument x:TypeArguments="x:String" x:Key="io_maand">
-          <VisualBasicReference x:TypeArguments="x:String" ExpressionText="maand" />
-        </InOutArgument>
-        <InArgument x:TypeArguments="x:String" x:Key="in_processingFolderPath">
-          <VisualBasicValue x:TypeArguments="x:String" ExpressionText="Config(&quot;NS_filepath_processingFolder&quot;).ToString" />
-        </InArgument>
-        <InArgument x:TypeArguments="x:String" x:Key="in_outputFilePath">
-          <VisualBasicValue x:TypeArguments="x:String" ExpressionText="Config(&quot;NS_filepath_dataNS&quot;).ToString" />
-        </InArgument>
+        <OutArgument x:TypeArguments="sd:DataTable" x:Key="out_dt_totaalOverzicht">[dt_totaalOverzicht]</OutArgument>
+        <InOutArgument x:TypeArguments="x:String" x:Key="io_maand">[maand]</InOutArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_processingFolderPath">[Config("NS_filepath_processingFolder").ToString]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_outputFilePath">[Config("NS_filepath_dataNS").ToString]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_PDF">[filepath_PDFfactuurNS]</InArgument>
+        <OutArgument x:TypeArguments="sd:DataTable" x:Key="out_dt_totaleSpecificaties">[dt_totaleSpecificaties]</OutArgument>
+        <InArgument x:TypeArguments="sd:DataTable" x:Key="in_dt_kaartHouders">[dt_updateLijstKaarthouders]</InArgument>
       </ui:InvokeWorkflowFile.Arguments>
     </ui:InvokeWorkflowFile>
     <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="3.0 Checks.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="400,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_5" UnSafe="False" WorkflowFileName="Workflows\Checks\3.0 Checks.xaml">
@@ -198,6 +199,9 @@
         </InArgument>
         <InArgument x:TypeArguments="x:String" x:Key="in_filepath_rapportage">
           <VisualBasicValue x:TypeArguments="x:String" ExpressionText="Config(&quot;NS_filepath_rapportage&quot;).ToString" />
+        </InArgument>
+        <InArgument x:TypeArguments="sd:DataTable" x:Key="in_dt_totaleSpecificaties">
+          <VisualBasicValue x:TypeArguments="sd:DataTable" ExpressionText="dt_totaleSpecificaties" />
         </InArgument>
       </ui:InvokeWorkflowFile.Arguments>
     </ui:InvokeWorkflowFile>

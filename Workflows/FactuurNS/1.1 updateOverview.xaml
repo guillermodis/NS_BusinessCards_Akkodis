@@ -4,11 +4,14 @@
     <x:Property Name="io_maand" Type="InOutArgument(x:String)" />
     <x:Property Name="in_processingFolderPath" Type="InArgument(x:String)" />
     <x:Property Name="in_outputFilePath" Type="InArgument(x:String)" />
+    <x:Property Name="in_PDF" Type="InArgument(x:String)" />
+    <x:Property Name="out_dt_totaleSpecificaties" Type="OutArgument(sd:DataTable)" />
+    <x:Property Name="in_dt_kaartHouders" Type="InArgument(sd:DataTable)" />
   </x:Members>
   <VisualBasic.Settings>
     <x:Null />
   </VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1203,2736</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1203,1964</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>Process_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="66">
@@ -103,7 +106,7 @@
       <AssemblyReference>UiPath.Workflow</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="Process" sap:VirtualizedContainerService.HintSize="677,2671" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="Process" sap:VirtualizedContainerService.HintSize="677,1899" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Name="filterAlgemeneTekst" />
       <Variable x:TypeArguments="x:String" Name="originalText" />
@@ -113,7 +116,6 @@
       <Variable x:TypeArguments="sd:DataTable" Name="dt_addToDtTrein" />
       <Variable x:TypeArguments="sd:DataTable" Name="dt_addToDtFiets" />
       <Variable x:TypeArguments="sd:DataTable" Name="dt_addToDtBusTramMetro" />
-      <Variable x:TypeArguments="sd:DataTable" Name="dt_totaleSpecificaties" />
       <Variable x:TypeArguments="sd:DataTable" Name="dt_Trein" />
       <Variable x:TypeArguments="sd:DataTable" Name="dt_Fiets" />
       <Variable x:TypeArguments="sd:DataTable" Name="dt_BusTramMetro" />
@@ -123,7 +125,7 @@
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <Sequence sap2010:Annotation.AnnotationText="Hier wordt de data van het bestand (NS) gesorteerd e.d. en toegevoegd aan het totaaloverzicht (Akkodis)." DisplayName="updateOverview" sap:VirtualizedContainerService.HintSize="635,2583" sap2010:WorkflowViewState.IdRef="Sequence_19">
+    <Sequence sap2010:Annotation.AnnotationText="Hier wordt de data van het bestand (NS) gesorteerd e.d. en toegevoegd aan het totaaloverzicht (Akkodis)." DisplayName="updateOverview" sap:VirtualizedContainerService.HintSize="635,1811" sap2010:WorkflowViewState.IdRef="Sequence_19">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -133,7 +135,8 @@
       <ui:LogMessage DisplayName="Log Message: Start updateOverview" sap:VirtualizedContainerService.HintSize="573,92" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;Start updateOverview...&quot;]" />
       <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Workflows\FactuurNS\1.0 PageFiltering.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="573,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_6" UnSafe="False" WorkflowFileName="Workflows\FactuurNS\1.0 PageFiltering.xaml">
         <ui:InvokeWorkflowFile.Arguments>
-          <scg:Dictionary x:TypeArguments="x:String, Argument" />
+          <InArgument x:TypeArguments="x:String" x:Key="in_processingFolderPath">[in_processingFolderPath]</InArgument>
+          <InArgument x:TypeArguments="x:String" x:Key="in_PDF">[in_PDF]</InArgument>
         </ui:InvokeWorkflowFile.Arguments>
       </ui:InvokeWorkflowFile>
       <Sequence sap2010:Annotation.AnnotationText="Hier worden alle datatables gebouwd die nodig zijn voor het bouwen van het totale overzicht van alle data." DisplayName="Build DataTables" sap:VirtualizedContainerService.HintSize="573,80" sap2010:WorkflowViewState.IdRef="Sequence_18">
@@ -144,7 +147,7 @@
             <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
-        <ui:BuildDataTable sap2010:Annotation.AnnotationText="" DataTable="[dt_totaleSpecificaties]" DisplayName="Build Data Table dt_totaleSpec" sap:VirtualizedContainerService.HintSize="338,91" sap2010:WorkflowViewState.IdRef="BuildDataTable_1" TableInfo="&lt;NewDataSet&gt;&#xA;  &lt;xs:schema id=&quot;NewDataSet&quot; xmlns=&quot;&quot; xmlns:xs=&quot;http://www.w3.org/2001/XMLSchema&quot; xmlns:msdata=&quot;urn:schemas-microsoft-com:xml-msdata&quot;&gt;&#xA;    &lt;xs:element name=&quot;NewDataSet&quot; msdata:IsDataSet=&quot;true&quot; msdata:MainDataTable=&quot;TableName&quot; msdata:UseCurrentLocale=&quot;true&quot;&gt;&#xA;      &lt;xs:complexType&gt;&#xA;        &lt;xs:choice minOccurs=&quot;0&quot; maxOccurs=&quot;unbounded&quot;&gt;&#xA;          &lt;xs:element name=&quot;TableName&quot;&gt;&#xA;            &lt;xs:complexType&gt;&#xA;              &lt;xs:sequence&gt;&#xA;                &lt;xs:element name=&quot;Kaartnummer&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Maand&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Datum&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Dag&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Soort_x0020_Vervoer&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Kenmerk&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Omschrijving&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Bedrag&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;              &lt;/xs:sequence&gt;&#xA;            &lt;/xs:complexType&gt;&#xA;          &lt;/xs:element&gt;&#xA;        &lt;/xs:choice&gt;&#xA;      &lt;/xs:complexType&gt;&#xA;    &lt;/xs:element&gt;&#xA;  &lt;/xs:schema&gt;&#xA;&lt;/NewDataSet&gt;">
+        <ui:BuildDataTable sap2010:Annotation.AnnotationText="" DataTable="[out_dt_totaleSpecificaties]" DisplayName="Build Data Table dt_totaleSpec" sap:VirtualizedContainerService.HintSize="338,91" sap2010:WorkflowViewState.IdRef="BuildDataTable_1" TableInfo="&lt;NewDataSet&gt;&#xA;  &lt;xs:schema id=&quot;NewDataSet&quot; xmlns=&quot;&quot; xmlns:xs=&quot;http://www.w3.org/2001/XMLSchema&quot; xmlns:msdata=&quot;urn:schemas-microsoft-com:xml-msdata&quot;&gt;&#xA;    &lt;xs:element name=&quot;NewDataSet&quot; msdata:IsDataSet=&quot;true&quot; msdata:MainDataTable=&quot;TableName&quot; msdata:UseCurrentLocale=&quot;true&quot;&gt;&#xA;      &lt;xs:complexType&gt;&#xA;        &lt;xs:choice minOccurs=&quot;0&quot; maxOccurs=&quot;unbounded&quot;&gt;&#xA;          &lt;xs:element name=&quot;TableName&quot;&gt;&#xA;            &lt;xs:complexType&gt;&#xA;              &lt;xs:sequence&gt;&#xA;                &lt;xs:element name=&quot;Kaartnummer&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Maand&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Datum&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Dag&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Soort_x0020_Vervoer&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Kenmerk&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Omschrijving&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Bedrag&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;              &lt;/xs:sequence&gt;&#xA;            &lt;/xs:complexType&gt;&#xA;          &lt;/xs:element&gt;&#xA;        &lt;/xs:choice&gt;&#xA;      &lt;/xs:complexType&gt;&#xA;    &lt;/xs:element&gt;&#xA;  &lt;/xs:schema&gt;&#xA;&lt;/NewDataSet&gt;">
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -202,7 +205,7 @@
           </sap:WorkflowViewStateService.ViewState>
         </ui:BuildDataTable>
       </Sequence>
-      <ui:ForEachFileX sap2010:Annotation.AnnotationText="Hier worden alle pagina's apart gelezen en bepaald welk soort vervoer deze pagina's vertonen. Vervolgens zal aan de hand van deze informatie bepaald worden welke workflow de pagina moet doorlopen (zie switch statement)." DisplayName="For Each File in Processing Folder" Folder="[in_processingFolderPath]" sap:VirtualizedContainerService.HintSize="573,1442" sap2010:WorkflowViewState.IdRef="ForEachFileX_1" IncludeSubDirectories="False" OrderBy="CreationDateOldFirst" SkipFolderWithoutPermission="False">
+      <ui:ForEachFileX sap2010:Annotation.AnnotationText="Hier worden alle pagina's apart gelezen en bepaald welk soort vervoer deze pagina's vertonen. Vervolgens zal aan de hand van deze informatie bepaald worden welke workflow de pagina moet doorlopen (zie switch statement)." DisplayName="For Each File in Processing Folder" Folder="[in_processingFolderPath]" sap:VirtualizedContainerService.HintSize="573,849" sap2010:WorkflowViewState.IdRef="ForEachFileX_1" IncludeSubDirectories="False" OrderBy="CreationDateOldFirst" SkipFolderWithoutPermission="False">
         <ui:ForEachFileX.Body>
           <ActivityAction x:TypeArguments="si:FileInfo, x:Int32">
             <ActivityAction.Argument1>
@@ -211,7 +214,7 @@
             <ActivityAction.Argument2>
               <DelegateInArgument x:TypeArguments="x:Int32" Name="CurrentIndex" />
             </ActivityAction.Argument2>
-            <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="539,1135" sap2010:WorkflowViewState.IdRef="Sequence_10">
+            <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="539,542" sap2010:WorkflowViewState.IdRef="Sequence_10">
               <sap:WorkflowViewStateService.ViewState>
                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
                   <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -240,7 +243,7 @@
                   </scg:List>
                 </ui:MultipleAssign.AssignOperations>
               </ui:MultipleAssign>
-              <Switch x:TypeArguments="x:String" DisplayName="Switch Soorten Vervoer" Expression="[typeOfDocument]" sap:VirtualizedContainerService.HintSize="497,775" sap2010:WorkflowViewState.IdRef="Switch`1_2">
+              <Switch x:TypeArguments="x:String" DisplayName="Switch Soorten Vervoer" Expression="[typeOfDocument]" sap:VirtualizedContainerService.HintSize="497,182" sap2010:WorkflowViewState.IdRef="Switch`1_2">
                 <Switch.Default>
                   <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="334,90" sap2010:WorkflowViewState.IdRef="WriteLine_4" Text="Anders" />
                 </Switch.Default>
@@ -263,7 +266,7 @@
                       <InOutArgument x:TypeArguments="x:String" x:Key="io_newRowKaart">[newRowKaart]</InOutArgument>
                     </ui:InvokeWorkflowFile.Arguments>
                   </ui:InvokeWorkflowFile>
-                  <ui:MergeDataTable Destination="[dt_totaleSpecificaties]" DisplayName="Merge Data Table" sap:VirtualizedContainerService.HintSize="360,133" sap2010:WorkflowViewState.IdRef="MergeDataTable_2" MissingSchemaAction="Add" Source="[dt_addToDtFiets]" />
+                  <ui:MergeDataTable Destination="[out_dt_totaleSpecificaties]" DisplayName="Merge Data Table" sap:VirtualizedContainerService.HintSize="360,133" sap2010:WorkflowViewState.IdRef="MergeDataTable_2" MissingSchemaAction="Add" Source="[dt_addToDtFiets]" />
                   <ui:MergeDataTable Destination="[dt_Fiets]" DisplayName="Merge Data Table" sap:VirtualizedContainerService.HintSize="360,133" sap2010:WorkflowViewState.IdRef="MergeDataTable_5" MissingSchemaAction="Add" Source="[dt_addToDtFiets]" />
                 </Sequence>
                 <Sequence x:Key="Bus, Tram en Metroreizen" sap:VirtualizedContainerService.HintSize="421,547" sap2010:WorkflowViewState.IdRef="Sequence_17">
@@ -279,7 +282,7 @@
                       <OutArgument x:TypeArguments="sd:DataTable" x:Key="out_dt_addToDtBusTramMetro">[dt_addToDtBusTramMetro]</OutArgument>
                     </ui:InvokeWorkflowFile.Arguments>
                   </ui:InvokeWorkflowFile>
-                  <ui:MergeDataTable Destination="[dt_totaleSpecificaties]" DisplayName="Merge Data Table" sap:VirtualizedContainerService.HintSize="379,133" sap2010:WorkflowViewState.IdRef="MergeDataTable_3" MissingSchemaAction="Add" Source="[dt_addToDtBusTramMetro]" />
+                  <ui:MergeDataTable Destination="[out_dt_totaleSpecificaties]" DisplayName="Merge Data Table" sap:VirtualizedContainerService.HintSize="379,133" sap2010:WorkflowViewState.IdRef="MergeDataTable_3" MissingSchemaAction="Add" Source="[dt_addToDtBusTramMetro]" />
                   <ui:MergeDataTable Destination="[dt_BusTramMetro]" DisplayName="Merge Data Table" sap:VirtualizedContainerService.HintSize="379,133" sap2010:WorkflowViewState.IdRef="MergeDataTable_6" MissingSchemaAction="Add" Source="[dt_addToDtBusTramMetro]" />
                 </Sequence>
                 <Sequence x:Key="Treinreizen" sap:VirtualizedContainerService.HintSize="403,547" sap2010:WorkflowViewState.IdRef="Sequence_15">
@@ -296,7 +299,7 @@
                       <OutArgument x:TypeArguments="sd:DataTable" x:Key="out_dt_addToDtTrein">[dt_addToDtTrein]</OutArgument>
                     </ui:InvokeWorkflowFile.Arguments>
                   </ui:InvokeWorkflowFile>
-                  <ui:MergeDataTable Destination="[dt_totaleSpecificaties]" DisplayName="Merge Data Table Trein" sap:VirtualizedContainerService.HintSize="361,133" sap2010:WorkflowViewState.IdRef="MergeDataTable_1" MissingSchemaAction="Add" Source="[dt_addToDtTrein]" />
+                  <ui:MergeDataTable Destination="[out_dt_totaleSpecificaties]" DisplayName="Merge Data Table Trein" sap:VirtualizedContainerService.HintSize="361,133" sap2010:WorkflowViewState.IdRef="MergeDataTable_1" MissingSchemaAction="Add" Source="[dt_addToDtTrein]" />
                   <ui:MergeDataTable Destination="[dt_Trein]" DisplayName="Merge Data Table Trein totalen" sap:VirtualizedContainerService.HintSize="361,133" sap2010:WorkflowViewState.IdRef="MergeDataTable_4" MissingSchemaAction="Add" Source="[dt_addToDtTrein]" />
                 </Sequence>
               </Switch>
@@ -311,46 +314,69 @@
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </ui:ForEachFileX>
-      <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Workflows\FactuurNS\1.5 Totaaloverzicht.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="573,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_7" UnSafe="False" WorkflowFileName="Workflows\FactuurNS\1.5 Totaaloverzicht.xaml">
-        <ui:InvokeWorkflowFile.Arguments>
-          <InArgument x:TypeArguments="x:String" x:Key="in_maand">
-            <VisualBasicValue x:TypeArguments="x:String" ExpressionText="io_maand" />
-          </InArgument>
-          <InArgument x:TypeArguments="sd:DataTable" x:Key="in_dt_Trein">
-            <VisualBasicValue x:TypeArguments="sd:DataTable" ExpressionText="dt_Trein" />
-          </InArgument>
-          <InArgument x:TypeArguments="sd:DataTable" x:Key="in_dt_Fiets">
-            <VisualBasicValue x:TypeArguments="sd:DataTable" ExpressionText="dt_Fiets" />
-          </InArgument>
-          <InArgument x:TypeArguments="sd:DataTable" x:Key="in_dt_BusTramMetro">
-            <VisualBasicValue x:TypeArguments="sd:DataTable" ExpressionText="dt_BusTramMetro" />
-          </InArgument>
-          <OutArgument x:TypeArguments="sd:DataTable" x:Key="out_dt_totaalOverzicht">
-            <VisualBasicReference x:TypeArguments="sd:DataTable" ExpressionText="out_dt_totaalOverzicht" />
-          </OutArgument>
-          <InArgument x:TypeArguments="x:String" x:Key="in_filepath_dataNS">
-            <VisualBasicValue x:TypeArguments="x:String" ExpressionText="in_outputFilePath" />
-          </InArgument>
-        </ui:InvokeWorkflowFile.Arguments>
-      </ui:InvokeWorkflowFile>
+      <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="573,25" sap2010:WorkflowViewState.IdRef="CommentOut_1">
+        <ui:CommentOut.Body>
+          <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="421,201" sap2010:WorkflowViewState.IdRef="Sequence_20">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Workflows\FactuurNS\1.5 Totaaloverzicht.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="379,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_7" UnSafe="False" WorkflowFileName="Workflows\FactuurNS\1.5 Totaaloverzicht.xaml">
+              <ui:InvokeWorkflowFile.Arguments>
+                <InArgument x:TypeArguments="x:String" x:Key="in_maand">[io_maand]</InArgument>
+                <InArgument x:TypeArguments="sd:DataTable" x:Key="in_dt_Trein">[dt_Trein]</InArgument>
+                <InArgument x:TypeArguments="sd:DataTable" x:Key="in_dt_Fiets">[dt_Fiets]</InArgument>
+                <InArgument x:TypeArguments="sd:DataTable" x:Key="in_dt_BusTramMetro">[dt_BusTramMetro]</InArgument>
+                <OutArgument x:TypeArguments="sd:DataTable" x:Key="out_dt_totaalOverzicht">[out_dt_totaalOverzicht]</OutArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="in_filepath_dataNS">[in_outputFilePath]</InArgument>
+                <InArgument x:TypeArguments="sd:DataTable" x:Key="in_dt_kaarthouders">[in_dt_kaartHouders]</InArgument>
+              </ui:InvokeWorkflowFile.Arguments>
+            </ui:InvokeWorkflowFile>
+          </Sequence>
+        </ui:CommentOut.Body>
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </ui:CommentOut>
       <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Workflows\FactuurNS\1.6 totaleSpecificaties.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="573,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_11" UnSafe="False" WorkflowFileName="Workflows\FactuurNS\1.6 totaleSpecificaties.xaml">
         <ui:InvokeWorkflowFile.Arguments>
           <InOutArgument x:TypeArguments="sd:DataTable" x:Key="io_dt_totaleSpecificaties">
-            <VisualBasicReference x:TypeArguments="sd:DataTable" ExpressionText="dt_totaleSpecificaties" />
+            <VisualBasicReference x:TypeArguments="sd:DataTable" ExpressionText="out_dt_totaleSpecificaties" />
           </InOutArgument>
           <InArgument x:TypeArguments="x:String" x:Key="in_maand">
             <VisualBasicValue x:TypeArguments="x:String" ExpressionText="io_maand" />
           </InArgument>
         </ui:InvokeWorkflowFile.Arguments>
       </ui:InvokeWorkflowFile>
-      <ui:WriteRange StartingCell="{x:Null}" AddHeaders="True" DataTable="[dt_totaleSpecificaties]" DisplayName="Write Range Totale Specificaties" sap:VirtualizedContainerService.HintSize="573,116" sap2010:WorkflowViewState.IdRef="WriteRange_2" SheetName="Totale Specificaties" WorkbookPath="[in_outputFilePath]">
+      <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="573,25" sap2010:WorkflowViewState.IdRef="CommentOut_2">
+        <ui:CommentOut.Body>
+          <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="400,204" sap2010:WorkflowViewState.IdRef="Sequence_21">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <ui:WriteRange StartingCell="{x:Null}" AddHeaders="True" DataTable="[out_dt_totaleSpecificaties]" DisplayName="Write Range Totale Specificaties" sap:VirtualizedContainerService.HintSize="358,116" sap2010:WorkflowViewState.IdRef="WriteRange_3" SheetName="Totale Specificaties" WorkbookPath="[in_outputFilePath]">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+            </ui:WriteRange>
+          </Sequence>
+        </ui:CommentOut.Body>
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
             <x:Boolean x:Key="IsPinned">False</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
-      </ui:WriteRange>
+      </ui:CommentOut>
       <ui:LogMessage DisplayName="Log Message: updateOverview successful" sap:VirtualizedContainerService.HintSize="573,92" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="[&quot; updateOverview successful...&quot;]" />
     </Sequence>
   </Sequence>
